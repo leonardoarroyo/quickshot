@@ -63,7 +63,7 @@ class QuickShot:
         self.bmp.SaveFile('{}{}{}.png'.format(os.path.expanduser(self.path), prefix, name), wx.BITMAP_TYPE_PNG)
 
 if __name__ == '__main__':
-    with open('config') as fin:
+    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config')) as fin:
         settings = json.load(fin)
     
     qs = QuickShot(settings)
@@ -71,5 +71,5 @@ if __name__ == '__main__':
     qs.save_screenshot(name=str(settings['count']))
 
     settings['count'] += 1
-    with open('config', 'w') as out:
+    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config'), 'w') as out:
         json.dump(settings, out)
